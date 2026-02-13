@@ -1,0 +1,2 @@
+[' Bangalore' 'Mumbai ' 'Delhi' None 'Bangalore' 'Chennai'
+ 'Mumbai' 'Delhi' ' Bangalore ']

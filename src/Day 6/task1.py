@@ -13,3 +13,4 @@ area, perimeter = calc_rectangle(length, width)
 
 # Print the result
 print(f"Area: {area}, Perimeter: {perimeter}")
+

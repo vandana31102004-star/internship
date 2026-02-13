@@ -1,0 +1,9 @@
+order_id,customer_name,product,quantity,price
+1001,Alice,Laptop,1,55000
+1002,Bob,Phone,2,30000
+,Charlie,Tablet,1,20000
+1004,David,Headphones,,2000
+1005,Eva,Monitor,1,
+1002,Bob,Phone,2,30000
+1007,Frank,Keyboard,1,1500
+1008,Grace,Mouse,
