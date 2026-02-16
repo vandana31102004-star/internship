@@ -77,6 +77,7 @@ print(type(bill))
 print(type(people))
 print(type(share))
 """
+"""
 # Hardcoded values
 item_name = "Laptop"
 quantity = 2
@@ -89,3 +90,9 @@ print("Item:", item_name, ", Qty:", quantity, ", Price:", price, ", Available:",
 # Calculate and print total cost
 total_cost = quantity * price
 print("Total Cost:", total_cost)
+"""
+total_bill=float(input("Enter the total bill amount : "))
+total_num=int(input("Enter the total no of people : "))
+
+each_bill=total_bill/total_num
+print(f"Total bill is {total_bill}. Each person should pay {each_bill:.2f}  ")

@@ -1,0 +1,2 @@
+ "Price": [500000, 1200000, 750000, 2000000, 650000, 1800000, 900000, 2500000, 3000000],
+    "City": ["Bangalore", "Mysore", "Bangalore", "Delhi", "Mysore", "Delhi", "Bangalore", "Delhi", "Mysore"]
