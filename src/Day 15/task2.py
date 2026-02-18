@@ -5,6 +5,7 @@ trials = 10000
 
 print("----- INDEPENDENT EVENTS (Coin + Die) -----")
 
+
 # Theoretical Probability
 p_heads = 1/2
 p_six = 1/6
