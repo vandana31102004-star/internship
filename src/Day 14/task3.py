@@ -55,23 +55,4 @@ r2_poly = r2_score(y_test, y_pred_poly)
 
 print("R² Score (Polynomial Model):", r2_poly)
 
-# -------------------------------------------------
-# Step 4: Visualization
-# -------------------------------------------------
-
-plt.figure()
-plt.scatter(X, y)
-plt.plot(X_test, y_pred_linear, linewidth=2)
-plt.title("Linear Regression Fit")
-plt.xlabel("Experience")
-plt.ylabel("Salary")
-plt.show()
-
-plt.figure()
-plt.scatter(X, y)
-plt.plot(X_test, y_pred_poly, linewidth=2)
-plt.title("Polynomial Regression Fit")
-plt.xlabel("Experience")
-plt.ylabel("Salary")
-plt.show()
 
