@@ -1,49 +1,65 @@
 import sqlite3
 import pandas as pd
 
-# ===============================
-# 1️⃣ CONNECT TO DATABASE
-# ===============================
-conn = sqlite3.connect("internship.db")
+# 1️⃣ Connect to database (or create it)
+conn = sqlite3.connect("interns.db")
 cursor = conn.cursor()
 
-# ===============================
-# 2️⃣ FILTER: Data Science interns with stipend > 5000
-# ===============================
-filter_query = """
-SELECT name, track, stipend
-FROM interns
-WHERE track = 'Data Science' AND stipend > 5000
-"""
-df_filter = pd.read_sql_query(filter_query, conn)
-print("✅ Data Science Interns with stipend > 5000:\n")
-print(df_filter)
+# 2️⃣ Drop tables if they exist (clean run)
+cursor.execute("DROP TABLE IF EXISTS interns")
+cursor.execute("DROP TABLE IF EXISTS mentors")
 
-# ===============================
-# 3️⃣ AGGREGATE: Average stipend per track
-# ===============================
-avg_query = """
-SELECT track, AVG(stipend) AS average_stipend
-FROM interns
-GROUP BY track
-"""
-df_avg = pd.read_sql_query(avg_query, conn)
-print("\n✅ Average stipend per track:\n")
-print(df_avg)
+# 3️⃣ Create interns table
+cursor.execute("""
+CREATE TABLE interns (
+    intern_id INTEGER PRIMARY KEY,
+    intern_name TEXT,
+    track TEXT,
+    stipend INTEGER
+)
+""")
 
-# ===============================
-# 4️⃣ COUNT: Number of interns per track
-# ===============================
-count_query = """
-SELECT track, COUNT(*) AS intern_count
-FROM interns
-GROUP BY track
-"""
-df_count = pd.read_sql_query(count_query, conn)
-print("\n✅ Number of interns per track:\n")
-print(df_count)
+# Insert sample data for interns
+intern_data = [
+    (1, 'Alice', 'Data Science', 6000),
+    (2, 'Bob', 'Web Development', 4000),
+    (3, 'Charlie', 'Data Science', 7000),
+    (4, 'David', 'Cyber Security', 5500),
+    (5, 'Eva', 'Web Development', 4500),
+    (6, 'Frank', 'Data Science', 5200)
+]
+cursor.executemany("INSERT INTO interns VALUES (?, ?, ?, ?)", intern_data)
 
-# ===============================
-# 5️⃣ CLOSE CONNECTION
-# ===============================
+# 4️⃣ Create mentors table
+cursor.execute("""
+CREATE TABLE mentors (
+    mentor_id INTEGER PRIMARY KEY,
+    mentor_name TEXT,
+    track TEXT
+)
+""")
+
+# Insert sample data for mentors
+mentor_data = [
+    (1, 'Prof. Smith', 'Data Science'),
+    (2, 'Dr. Johnson', 'Web Development'),
+    (3, 'Ms. Davis', 'Cyber Security')
+]
+cursor.executemany("INSERT INTO mentors VALUES (?, ?, ?)", mentor_data)
+
+conn.commit()
+
+# 5️⃣ INNER JOIN: List interns with their mentor
+query_join = """
+SELECT interns.intern_name, interns.track, interns.stipend, mentors.mentor_name
+FROM interns
+INNER JOIN mentors
+ON interns.track = mentors.track;
+"""
+
+# Load result into Pandas DataFrame
+df_join = pd.read_sql_query(query_join, conn)
+print("Interns with their Mentor:\n", df_join)
+
+# Close connection
 conn.close()
