@@ -1,0 +1,5 @@
+pandas
+matplotlib
+seaborn
+Data handling → pandas
+Data visualization → matplotlib, seaborn
